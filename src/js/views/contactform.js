@@ -39,11 +39,11 @@ export const ContactForm = () => {
             <label>Address</label>
             <input type="text" name="address" className="form-control" placeholder="Enter address" />
           </div>
-          <div className="form-group form-button">
+          <div className="form-group text-center mt-4 form-button">
             <input type="submit" className="form-submit" value="Submit" />
           </div>
         </form>
-        <a href='/'>Or go back to Contacts</a>
+        <a className='text-center' href='/'>Or go back to Contacts</a>
       </div>
     </div>
   );
