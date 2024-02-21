@@ -1,45 +1,63 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contacts: [],
+			contact: {}
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			LoadContactData() {
+				fetch(`https://playground.4geeks.com/apis/fake/contact/agenda/AgendaTomas`)
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ contacts: [...data] })
+					})
+					.catch(error => console.log("error to obtain contact data", error))
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			ContactForm: (data) => {
+				console.log(data)
+				fetch("https://playground.4geeks.com/apis/fake/contact/", {
+					method: "POST",
+					body: JSON.stringify({
+						"full_name": data.fullname,
+						"email": data.email,
+						"agenda_slug": "AgendaTomas",
+						"address": data.address,
+						"phone": data.phone
+					}),
+					headers: {
+						"content-type": "application/json",
+					},
+				}).then((response) => {
+					console.log("response", response)
+					return response.json()
+				}).then((data2) => {
+					console.log("data", data2)
+				}).catch((error) => {
+					console.log(error)
+				})
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			fetchDelete: (id) => {
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+				  method: "DELETE",
+				  headers: {
+					"content-type": "application/json",
+				  },
+				})
+				  .then((response) => {
+					if (!response.ok) {
+					  throw new Error(`HTTP error! status: ${response.status}`);
+					}
+					console.log("response", response);
+					return response.json();
+				  })
+				  .catch((error) => {
+					console.log("Error:", error);
+				  });
+			  },
 		}
 	};
 };
 
 export default getState;
+
+// falta crear put , post y delete.
