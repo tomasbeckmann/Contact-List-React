@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Context } from "/workspaces/Contact-List-React/src/js/store/appContext.js"
+import { useNavigate } from 'react-router-dom';
 
 
 export const ContactForm = () => {
   const { actions } = useContext(Context)
 
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
 
@@ -14,7 +16,7 @@ export const ContactForm = () => {
     console.log(Object.fromEntries(new FormData(event.target)));
     actions.ContactForm(inputData);
     console.log(inputData)
-
+    navigate("/")
 
   };
 

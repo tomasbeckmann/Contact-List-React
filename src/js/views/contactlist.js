@@ -8,7 +8,7 @@ export function ContactList() {
 
     useEffect(() => {
         actions.LoadContactData();
-        console.log(store.contacts);
+        console.log(store.contact);
     }, []);
 
     return (

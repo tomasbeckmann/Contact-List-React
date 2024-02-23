@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import 	{ContactForm} from "./views/contactform";
-import  {ContactList}  from "./views/contactlist";
-/* import { Contact } from "./component/contact"; */
+import { ContactForm } from "./views/contactform";
+import { ContactList } from "./views/contactlist";
+import { UpdateForm } from "./views/updatecontact";
 
 import injectContext from "./store/appContext";
 
@@ -19,7 +19,7 @@ const Layout = () => {
 				<Routes>
 					<Route path="/" element={<ContactList />} />
 					<Route path="/contactform" element={<ContactForm />} />
-					{/* <Route path="/contact" element={<Contact />} /> */}
+					<Route path="/updateform/:id" element={<UpdateForm />} />
 				</Routes>
 			</BrowserRouter>
 		</div>
