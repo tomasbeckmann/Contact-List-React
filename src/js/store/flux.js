@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			LoadContactData() {
-				fetch(`https://playground.4geeks.com/apis/fake/contact/agenda/AgendaTomas`)
+				return fetch(`https://playground.4geeks.com/apis/fake/contact/agenda/AgendaTomas`)
 					.then(resp => resp.json())
 					.then(data => {
 						setStore({ contacts: [...data] })
@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			ContactForm: (data) => {
 				console.log(data)
-				fetch("https://playground.4geeks.com/apis/fake/contact/", {
+				return fetch("https://playground.4geeks.com/apis/fake/contact/", {
 					method: "POST",
 					body: JSON.stringify({
 						"full_name": data.fullname,

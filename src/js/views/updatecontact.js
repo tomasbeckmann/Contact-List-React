@@ -6,8 +6,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 export const UpdateForm = () => {
 
-
-
     const { id } = useParams();
 
     const navigate = useNavigate();
@@ -21,10 +19,10 @@ export const UpdateForm = () => {
         const inputData = Object.fromEntries(new FormData(event.target));
         inputData.id = id
         console.log(Object.fromEntries(new FormData(event.target)));
-        actions.UpdateContact(inputData);
+        await actions.UpdateContact(inputData);
         console.log(inputData)
+        await actions.LoadContactData();
         navigate("/")
-
     };
 
     return (
@@ -34,7 +32,7 @@ export const UpdateForm = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Full Name</label>
-                        <input type="text" name="fullname" className="form-control" placeholder="Full Name" />
+                        <input type="text" name="fullname" id="fullname" className="form-control" placeholder="Full Name" />
                     </div>
                     <div className="form-group">
                         <label>Email</label>

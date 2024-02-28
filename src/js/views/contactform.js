@@ -14,8 +14,9 @@ export const ContactForm = () => {
 
     const inputData = Object.fromEntries(new FormData(event.target));
     console.log(Object.fromEntries(new FormData(event.target)));
-    actions.ContactForm(inputData);
+    await actions.ContactForm(inputData);
     console.log(inputData)
+    await actions.LoadContactData();
     navigate("/")
 
   };
